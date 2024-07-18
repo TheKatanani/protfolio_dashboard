@@ -46,7 +46,7 @@ const FormInfo = ({ data }) => {
       if (file && changedImage) {
         const imageDarkRef = ref(storage, `images/${file.darkLogo.name + v4()}`);
         const imageLightRef = ref(storage, `images/${file.lightLogo.name + v4()}`);
-        const imageAvatarRef = ref(storage, `images/${file.avatar.name + v4()}`);
+        const imageAvatarRef = ref(storage, `images/${file?.avatar.name + v4()}`);
         const darkSnapshot = await uploadBytes(imageDarkRef, file?.darkLogo);
         const darkLogo = await getDownloadURL(darkSnapshot.ref);
 
@@ -71,7 +71,7 @@ const FormInfo = ({ data }) => {
 
   useEffect(() => {
     setFormData((prev) => ({ ...prev, ...data }));
-    setUrl({ avatar: data.avatar, darkLogo: data.logo.dark, lightLogo: data.logo.light });
+    setUrl({ avatar: data?.avatar, darkLogo: data.logo.dark, lightLogo: data.logo.light });
   }, [data]);
 
   return (
